@@ -1,4 +1,5 @@
 using BookStoreMy.Data;
+using BookStoreMy.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,7 @@ namespace BookStoreMy
         {
             services.AddDbContext<BookStoreContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DBConnection")));
+            services.AddScoped<BookRepository>();
             services.AddControllersWithViews();
         }
 
@@ -50,7 +52,7 @@ namespace BookStoreMy
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Book}/{action=GetAllBooks}/{id?}");
             });
         }
     }

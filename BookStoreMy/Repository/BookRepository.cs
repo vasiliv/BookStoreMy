@@ -1,30 +1,59 @@
-﻿using BookStoreMy.Models;
+﻿using BookStoreMy.Data;
+using BookStoreMy.Models;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace BookStoreMy.Repository
 {
     public class BookRepository
     {
-        private List<BookModel> DataSource = new List<BookModel>() {
-                new BookModel(){ Id = 1, Title = "C#", Author ="Bill"},
-                new BookModel(){ Id = 2, Title = "Java",  Author ="Steve"},
-                new BookModel(){ Id = 3, Title = "PHP",  Author ="Ram"},
-                new BookModel(){ Id = 4, Title = "Python",  Author ="Abdul"}
-            };
-        public List<BookModel> GetAllBooks()
+        private readonly BookStoreContext _context;
+        public BookRepository(BookStoreContext context)
         {
-            return  DataSource;
+            _context = context;
+        }        
+        public async Task<List<BookModel>> GetAllBooks()
+        {
+            return await _context.Books.ToListAsync();
+            //webgentlis kkodi arasachiroa
+            //var books = new List<BookModel>();
+            //var allbooks = await _context.Books.ToListAsync();
+            //if (allbooks?.Any() == true)
+            //{
+            //    foreach (var book in allbooks)
+            //    {
+            //        books.Add(new BookModel()
+            //        {
+            //            Author = book.Author,
+            //            Category = book.Category,
+            //            Description = book.Description,
+            //            Id = book.Id,
+            //            Language = book.Language,
+            //            Title = book.Title,
+            //            TotalPages = book.TotalPages
+            //        });
+            //    }
+            //}
+            //return books;
         }
-        public BookModel GetBookById(int id)
+        public async Task<BookModel> GetBookById(int id)
         {
-            return DataSource.FirstOrDefault(d => d.Id == id);
+            return await _context.Books.FirstOrDefaultAsync(d => d.Id == id);
         }
         //public List<BookModel> SearchBook(string title, string authorName)
         //{
         //    var searchedBook = (from num in DataSource select num).Contains(title);
         //    return DataSource.Contains(title);
         //}
+        public async Task<BookModel> AddBook(BookModel book)
+        {
+            var result = await _context.Books.AddAsync(book);
+            await _context.SaveChangesAsync();
+            return result.Entity;
+        }
     }
 }
