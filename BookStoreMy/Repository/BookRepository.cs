@@ -50,7 +50,7 @@ namespace BookStoreMy.Repository
         //    return DataSource.Contains(title);
         //}
         public async Task<BookModel> AddBook(BookModel book)
-        {
+        {            
             var result = await _context.Books.AddAsync(book);
             await _context.SaveChangesAsync();
             return result.Entity;

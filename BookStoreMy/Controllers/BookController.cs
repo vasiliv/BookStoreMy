@@ -33,20 +33,24 @@ namespace BookStoreMy.Controllers
         [HttpPost]
         public async Task<ActionResult<BookModel>> AddNewBook(BookModel book)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (book == null)
-                    return BadRequest();
+                try
+                {
+                    if (book == null)
+                        return BadRequest();
 
-                var createdBook = await _bookRepository.AddBook(book);
+                    var createdBook = await _bookRepository.AddBook(book);
 
-                return RedirectToAction(nameof(GetAllBooks));
+                    return RedirectToAction(nameof(GetAllBooks));
+                }
+                catch (Exception)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError,
+                        "Error creating new employee record");
+                }                
             }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    "Error creating new employee record");
-            }
+            return View();
         }
     }
 }
