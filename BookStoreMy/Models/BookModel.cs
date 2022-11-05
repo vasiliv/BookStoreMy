@@ -15,6 +15,6 @@ namespace BookStoreMy.Models
         public string Language { get; set; }
         [Required(ErrorMessage = "Please enter the number of pages")]
         [Display(Name = "Total pages of the book")]
-        public int TotalPages { get; set; }
+        public int? TotalPages { get; set; }
     }
 }
