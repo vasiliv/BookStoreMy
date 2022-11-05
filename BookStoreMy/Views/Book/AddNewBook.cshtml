@@ -37,9 +37,10 @@
             <div class="form-group">
                 <label asp-for="Language" class="control-label"></label>
                 <select asp-for="Language" class="form-control">
-                    <option>Hindi</option>
-                    <option>English</option>
-                    <option>Georgian</option>
+                    @*value is saved to db*@
+                    <option value="1">Hindi</option>
+                    <option value="2">English</option>
+                    <option value="3">Georgian</option>
                 </select>
                 <span asp-validation-for="Language" class="text-danger"></span>
             </div>
