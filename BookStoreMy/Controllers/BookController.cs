@@ -2,6 +2,7 @@
 using BookStoreMy.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -29,13 +30,17 @@ namespace BookStoreMy.Controllers
         //}
         public IActionResult AddNewBook()
         {
-            ViewBag.Language = new List<string> { "Hindi", "English", "Georgian"};
+            //Part 55
+            ViewBag.Language = new SelectList(new List<string> { "Hindi", "English", "Georgian" });
+            //ViewBag.Language = new SelectList(GetLanguage(), "Id", "Name");
             return View();
         }
         [HttpPost]
         public async Task<ActionResult<BookModel>> AddNewBook(BookModel book)
         {
-            ViewBag.Language = new List<string> { "Hindi", "English", "Georgian" };
+            //Part 55
+            ViewBag.Language = new SelectList(new List<string> { "Hindi", "English", "Georgian" });
+            //ViewBag.Language = new SelectList(GetLanguage(), "Id", "Name");
             if (ModelState.IsValid)
             {
                 try
@@ -54,6 +59,15 @@ namespace BookStoreMy.Controllers
                 }                
             }
             return View();
+        }
+        private List<LanguageModel> GetLanguage ()
+        {
+            return new List<LanguageModel>
+            {
+                new LanguageModel{Id = 1, Text = "Hindi"},
+                new LanguageModel{Id = 2, Text = "English"},
+                new LanguageModel{Id = 3, Text = "Georgian"}
+            };
         }
     }
 }
