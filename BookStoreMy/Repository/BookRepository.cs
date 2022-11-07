@@ -1,5 +1,6 @@
 ﻿using BookStoreMy.Data;
 using BookStoreMy.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -59,7 +60,7 @@ namespace BookStoreMy.Repository
         //{
         //    return await _context.Languages.ToListAsync();
         //}
-        public List<LanguageModel> GetLanguage()
+        public List<LanguageModel> GetLanguages()
         {
             return _context.Languages.ToList();
         }

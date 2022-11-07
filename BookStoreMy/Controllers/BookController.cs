@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace BookStoreMy.Controllers
@@ -35,7 +36,13 @@ namespace BookStoreMy.Controllers
             //Part 56 if we take data from hardcoded GetLanguage method
             //ViewBag.Language = new SelectList(GetLanguage(), "Id", "Text");
             //Part 56 if we take data from db
-            ViewBag.Language = new SelectList(_bookRepository.GetLanguage(), "Id", "Text");
+            //ViewBag.Language = new SelectList(_bookRepository.GetLanguages(), "Id", "Text");
+            //Part 57 if we take data from hardcoded GetLanguage method
+            //ViewBag.Language = GetLanguages().Select(n => new SelectListItem() 
+            //                                    { Value = n.Id.ToString(), Text = n.Text}).ToList();
+            //Part 57 if we take data from db
+            ViewBag.Language = _bookRepository.GetLanguages().Select(n => new SelectListItem()
+                                                  { Value = n.Id.ToString(), Text = n.Text }).ToList();
             return View();
         }
         [HttpPost]
@@ -44,9 +51,15 @@ namespace BookStoreMy.Controllers
             //Part 55
             //ViewBag.Language = new SelectList(new List<string> { "Hindi", "English", "Georgian" });
             //Part 56 if we take data from hardcoded GetLanguage method
-            //ViewBag.Language = new SelectList(GetLanguage(), "Id", "Text");
+            //ViewBag.Language = new SelectList(GetLanguages(), "Id", "Text");
             //Part 56 if we take data from db
-            ViewBag.Language = new SelectList(_bookRepository.GetLanguage(), "Id", "Text");
+            //ViewBag.Language = new SelectList(_bookRepository.GetLanguages(), "Id", "Text");
+            //Part 57 if we take data from hardcoded GetLanguage method
+            //ViewBag.Language = GetLanguages().Select(n => new SelectListItem()
+            //                    { Value = n.Id.ToString(), Text = n.Text }).ToList();
+            //Part 57 if we take data from db
+            ViewBag.Language = _bookRepository.GetLanguages().Select(n => new SelectListItem()
+                                    { Value = n.Id.ToString(), Text = n.Text }).ToList();   
             if (ModelState.IsValid)
             {
                 try
@@ -66,14 +79,14 @@ namespace BookStoreMy.Controllers
             }
             return View();
         }
-        //private List<LanguageModel> GetLanguage ()
-        //{
-        //    return new List<LanguageModel>()
-        //    {
-        //        new LanguageModel(){Id = 1, Text = "Hindi"},
-        //        new LanguageModel(){Id = 2, Text = "English"},
-        //        new LanguageModel(){Id = 3, Text = "Georgian"}
-        //    };
-        //}
+        private List<LanguageModel> GetLanguages()
+        {
+            return new List<LanguageModel>()
+            {
+                new LanguageModel(){Id = 1, Text = "Hindi"},
+                new LanguageModel(){Id = 2, Text = "English"},
+                new LanguageModel(){Id = 3, Text = "Georgian"}
+            };
+        }
     }
 }
