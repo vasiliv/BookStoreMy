@@ -31,16 +31,22 @@ namespace BookStoreMy.Controllers
         public IActionResult AddNewBook()
         {
             //Part 55
-            ViewBag.Language = new SelectList(new List<string> { "Hindi", "English", "Georgian" });
-            //ViewBag.Language = new SelectList(GetLanguage(), "Id", "Name");
+            //ViewBag.Language = new SelectList(new List<string> { "Hindi", "English", "Georgian" });
+            //Part 56 if we take data from hardcoded GetLanguage method
+            //ViewBag.Language = new SelectList(GetLanguage(), "Id", "Text");
+            //Part 56 if we take data from db
+            ViewBag.Language = new SelectList(_bookRepository.GetLanguage(), "Id", "Text");
             return View();
         }
         [HttpPost]
         public async Task<ActionResult<BookModel>> AddNewBook(BookModel book)
         {
             //Part 55
-            ViewBag.Language = new SelectList(new List<string> { "Hindi", "English", "Georgian" });
-            //ViewBag.Language = new SelectList(GetLanguage(), "Id", "Name");
+            //ViewBag.Language = new SelectList(new List<string> { "Hindi", "English", "Georgian" });
+            //Part 56 if we take data from hardcoded GetLanguage method
+            //ViewBag.Language = new SelectList(GetLanguage(), "Id", "Text");
+            //Part 56 if we take data from db
+            ViewBag.Language = new SelectList(_bookRepository.GetLanguage(), "Id", "Text");
             if (ModelState.IsValid)
             {
                 try
@@ -60,14 +66,14 @@ namespace BookStoreMy.Controllers
             }
             return View();
         }
-        private List<LanguageModel> GetLanguage ()
-        {
-            return new List<LanguageModel>
-            {
-                new LanguageModel{Id = 1, Text = "Hindi"},
-                new LanguageModel{Id = 2, Text = "English"},
-                new LanguageModel{Id = 3, Text = "Georgian"}
-            };
-        }
+        //private List<LanguageModel> GetLanguage ()
+        //{
+        //    return new List<LanguageModel>()
+        //    {
+        //        new LanguageModel(){Id = 1, Text = "Hindi"},
+        //        new LanguageModel(){Id = 2, Text = "English"},
+        //        new LanguageModel(){Id = 3, Text = "Georgian"}
+        //    };
+        //}
     }
 }

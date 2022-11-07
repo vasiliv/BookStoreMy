@@ -55,5 +55,13 @@ namespace BookStoreMy.Repository
             await _context.SaveChangesAsync();
             return result.Entity;
         }
+        //public async Task<List<LanguageModel>> GetLanguage()
+        //{
+        //    return await _context.Languages.ToListAsync();
+        //}
+        public List<LanguageModel> GetLanguage()
+        {
+            return _context.Languages.ToList();
+        }
     }
 }

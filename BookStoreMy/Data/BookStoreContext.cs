@@ -11,7 +11,7 @@ namespace BookStoreMy.Data
 
         }
         public DbSet<BookModel> Books { get; set; }
-
+        public DbSet<LanguageModel> Languages { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -35,6 +35,22 @@ namespace BookStoreMy.Data
                     Language = "English",
                     Title = "Java",
                     TotalPages = 600
+                });
+            modelBuilder.Entity<LanguageModel>().HasData(
+                new LanguageModel
+                {
+                    Id = 1,
+                    Text = "Hindi"
+                },
+                new LanguageModel
+                {
+                    Id = 2,
+                    Text = "English"
+                },
+                new LanguageModel
+                {
+                    Id = 3,
+                    Text = "Georgian"
                 });
         }
     }
