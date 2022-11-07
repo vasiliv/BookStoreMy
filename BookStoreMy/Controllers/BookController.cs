@@ -3,6 +3,7 @@ using BookStoreMy.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace BookStoreMy.Controllers
@@ -28,11 +29,13 @@ namespace BookStoreMy.Controllers
         //}
         public IActionResult AddNewBook()
         {
+            ViewBag.Language = new List<string> { "Hindi", "English", "Georgian"};
             return View();
         }
         [HttpPost]
         public async Task<ActionResult<BookModel>> AddNewBook(BookModel book)
         {
+            ViewBag.Language = new List<string> { "Hindi", "English", "Georgian" };
             if (ModelState.IsValid)
             {
                 try
