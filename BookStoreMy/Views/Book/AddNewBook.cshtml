@@ -34,15 +34,22 @@
                 <input asp-for="Category" class="form-control" />
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            @*<div class="form-group">
                 <label asp-for="Language" class="control-label"></label>
-                <select asp-for="Language" class="form-control" asp-items="ViewBag.Language">
+                <select asp-for="Language" class="form-control" asp-items="ViewBag.Language">*@
                     @*value is saved to db, text is visible to us
                     <option value="1">Hindi</option>
                     <option value="2">English</option>
                     <option value="3">Georgian</option>*@
-                </select>
+                @*</select>
                 <span asp-validation-for="Language" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="MultiLanguage" class="control-label"></label>
+                <select asp-for="MultiLanguage" class="form-control" asp-items="ViewBag.Language" multiple>
+                    
+                </select>
+                <span asp-validation-for="MultiLanguage" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TotalPages" class="control-label"></label>

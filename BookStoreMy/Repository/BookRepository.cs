@@ -33,7 +33,7 @@ namespace BookStoreMy.Repository
             //            Category = book.Category,
             //            Description = book.Description,
             //            Id = book.Id,
-            //            Language = book.Language,
+            //            MultiLanguage = book.MultiLanguage,
             //            Title = book.Title,
             //            TotalPages = book.TotalPages
             //        });

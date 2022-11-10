@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStoreMy.Models
 {
@@ -14,6 +16,9 @@ namespace BookStoreMy.Models
         public string Category { get; set; }
         [Required(ErrorMessage = "Please select the language")]
         public string Language { get; set; }
+        //
+        //[NotMapped]
+        public List<string> MultiLanguage { get; set; }
         [Required(ErrorMessage = "Please enter the number of pages")]
         [Display(Name = "Total pages of the book")]
         public int? TotalPages { get; set; }
