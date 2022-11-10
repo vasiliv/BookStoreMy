@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,8 +42,19 @@ namespace BookStoreMy.Controllers
             //ViewBag.Language = GetLanguages().Select(n => new SelectListItem() 
             //                                    { Value = n.Id.ToString(), Text = n.Text}).ToList();
             //Part 57 if we take data from db
-            ViewBag.Language = _bookRepository.GetLanguages().Select(n => new SelectListItem()
-                                                  { Value = n.Id.ToString(), Text = n.Text }).ToList();
+            //ViewBag.Language = _bookRepository.GetLanguages().Select(n => new SelectListItem()
+            //                                      { Value = n.Id.ToString(), Text = n.Text }).ToList();
+            //Part 58 if we make hardcoded  SelectListItem
+            var group1 = new SelectListGroup { Name = "Group 1" };
+            var group2 = new SelectListGroup { Name = "Group 2" };
+            var group3 = new SelectListGroup { Name = "Group 3" };
+            ViewBag.Language = new List<SelectListItem>
+                {
+                    new SelectListItem{ Value = "1", Text = "English", Group = group1},
+                    new SelectListItem{ Value = "2", Text = "Georgian", Group = group2},
+                    new SelectListItem{ Value = "3", Text = "Hindi", Group = group2},
+                    new SelectListItem{ Value = "4", Text = "Deutsch", Group = group3}
+                };
             return View();
         }
         [HttpPost]
@@ -58,8 +70,19 @@ namespace BookStoreMy.Controllers
             //ViewBag.Language = GetLanguages().Select(n => new SelectListItem()
             //                    { Value = n.Id.ToString(), Text = n.Text }).ToList();
             //Part 57 if we take data from db
-            ViewBag.Language = _bookRepository.GetLanguages().Select(n => new SelectListItem()
-                                    { Value = n.Id.ToString(), Text = n.Text }).ToList();   
+            //ViewBag.Language = _bookRepository.GetLanguages().Select(n => new SelectListItem()
+            //                        { Value = n.Id.ToString(), Text = n.Text }).ToList();
+            //Part 58 if we make hardcoded  SelectListItem
+            var group1 = new SelectListGroup { Name = "Group 1" };
+            var group2 = new SelectListGroup { Name = "Group 2" };
+            var group3 = new SelectListGroup { Name = "Group 3" };
+            ViewBag.Language = new List<SelectListItem>
+                {
+                    new SelectListItem{ Value = "1", Text = "English", Group = group1},
+                    new SelectListItem{ Value = "2", Text = "Georgian", Group = group2},
+                    new SelectListItem{ Value = "3", Text = "Hindi", Group = group2},
+                    new SelectListItem{ Value = "4", Text = "Deutsch", Group = group3}
+                };
             if (ModelState.IsValid)
             {
                 try
